@@ -1,44 +1,24 @@
 {
-  "$schema": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/rules.schema.json",
-  "shop.app": {
-    "detectors": [
-      {
-        "presentMatcher": {
-          "type": "css",
-          "target": { "selector": "section[data-section-name='cookie-active-consent-notice']" }
-        },
-        "showingMatcher": {
-          "type": "css",
-          "target": {
-            "selector": "section[data-section-name='cookie-active-consent-notice']",
-            "displayFilter": true
-          }
-        }
-      }
-    ],
-    "methods": [
-      {
-        "name": "DO_CONSENT",
-        "action": {
-          "type": "click",
-          "parent": {
-            "selector": "section[data-section-name='cookie-active-consent-notice'] .button-container"
-          },
-          "target": {
-            "selector": "button",
-            "textFilter": "Necessary cookies only"
-          }
-        }
+  "shopifyActiveConsent": {
+    "detectors": [{
+      "presentMatcher": {
+        "type": "css",
+        "target": { "selector": "section#active-consent" }
       },
-      {
-        "name": "HIDE_CMP",
-        "action": {
-          "type": "hide",
-          "target": {
-            "selector": "section[data-section-name='cookie-active-consent-notice']"
-          }
+      "showingMatcher": {
+        "type": "css",
+        "target": { "selector": "section#active-consent" }
+      }
+    }],
+    "methods": [{
+      "name": "DO_CONSENT",
+      "action": {
+        "type": "click",
+        "target": {
+          "selector": "section#active-consent button[data-component-name='reject']",
+          "textFilter": "Reject all"
         }
       }
-    ]
+    }]
   }
 }
